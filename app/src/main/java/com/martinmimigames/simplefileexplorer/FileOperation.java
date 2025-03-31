@@ -45,8 +45,10 @@ public class FileOperation {
             return true;
 
         // add (copy) to back of file/folder name to avoid overwrite
-        if (dst.exists())
-            return move(src, new File(dst.getParent(), getMiddleName(dst) + "(copy)" + getNameExtension(dst)));
+        if (dst.exists()) {
+            return true;
+//            return copy(src, new File(dst.getParent(), getMiddleName(dst) + "(copy)" + getNameExtension(dst)));
+        }
 
         // move logic based on android version, if failed, use copy & delete logic
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -68,8 +70,10 @@ public class FileOperation {
 
     public static boolean copy(final File src, final File dst) {
         // add (copy) to back of file/folder name to avoid overwrite
-        if (dst.exists())
-            return copy(src, new File(dst.getParent(), getMiddleName(dst) + "(copy)" + getNameExtension(dst)));
+        if (dst.exists()) {
+            return true;
+//            return copy(src, new File(dst.getParent(), getMiddleName(dst) + "(copy)" + getNameExtension(dst)));
+        }
 
         // open & walk directory to copy data
         if (src.isDirectory()) {
