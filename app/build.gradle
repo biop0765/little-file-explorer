@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-
+    namespace 'com.martinmimigames.simplefileexplorer'
     compileSdk 33
 
     defaultConfig {
@@ -24,33 +24,23 @@ android {
         baseline = file("lint-baseline.xml")
     }
 
-    signingConfigs {
-        def keystorePropertiesFiles = rootProject.file("../keystore.properties")
-        def keystoreProperties = new Properties()
-        keystoreProperties.load(new FileInputStream(keystorePropertiesFiles))
-        basic {
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
-            crunchPngs false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.basic
-        }
-        debug {
-            signingConfig signingConfigs.basic
         }
     }
+    
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+repositories {
+    maven {
+        url 'https://jitpack.io'
     }
 }
